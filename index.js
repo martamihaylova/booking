@@ -1,5 +1,9 @@
-const express = require ('express');
+const express = require('express');
 
-const server =  express();
+const app =  express();
 
-server.listen(3000, console.log.bind(console, `Server listening on port 3000...`));
+require('./config/express')(app);
+require('./config/mongoose');
+// console.log(process.env.NODE_ENV);
+
+app.listen(3000, console.log.bind(console, `Server listening on port 3000...`));
