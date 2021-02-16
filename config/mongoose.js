@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const {DB_URL} = require('./config');
 
-mongoose.connect(`mongodb+srv://admin:488690@clustercubes.xrefz.mongodb.net/bookingDB?retryWrites=true&w=majority`,
+mongoose.connect(DB_URL,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
