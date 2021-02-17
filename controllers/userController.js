@@ -20,7 +20,6 @@ initPassport(passport, async(username) => {
     }
 });
 
-
 router.get('/logout', check.ifLoged, (req, res) => {
     req.logOut();
     res.redirect('/user/login');
@@ -37,14 +36,15 @@ router.get('/register', check.ifNotLoged, (req, res) => {
     res.render('register', { title: 'Register' });
 });
 router.post('/register', check.ifNotLoged, (req, res) => {
-    let { username, password, repeatPassword } = req.body;
+    console.log(req.body);
+    let { email, username, password, rePassword } = req.body;
     username = username.toLowerCase();
-    if (password === repeatPassword) {
+    if (password === rePassword) {
         Users.find({ username }, (err, data) => {
             if (data.length > 0) {
                 res.render('register', { message: 'Unsuccessful reristration.Please try again.', title: 'Register' });
             } else {
-                if (register(username, password)) {
+                if (register(email, username, password)) {
                     res.render('login', { message: 'Successful reristration.Please login.', title: 'Login' });
                 } else {
                     res.send('Something went wrong');

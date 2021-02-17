@@ -1,13 +1,13 @@
 const Users = require('../models/Users');
 const bcrypt = require('bcrypt');
 const { SALT_ROUNDS } = require('../config/config');
-console.log(SALT_ROUNDS);
 
-function register(name, password) {
+function register(email, name, password) {
     let isSuccessful;
     bcrypt.hash(password, SALT_ROUNDS)
         .then((hashedPassword) => {
             let user = new Users({
+                email,
                 username: name,
                 password: hashedPassword,
             });
