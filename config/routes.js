@@ -1,5 +1,5 @@
 const userController = require('../controllers/userController.js');
-const getController = require('../controllers/getController.js');
+const homeController = require('../controllers/homeController.js');
 
 module.exports = (app) => {
     // TODO...
@@ -8,7 +8,7 @@ module.exports = (app) => {
     // app.use('/delete', createAndDeleteController);
     // app.use('/edit', editController);
     // app.use('/search', searchController);
-    app.use('/', getController);
+    app.use('/', homeController);
     app.get('*', (req, res) => {
         res.send('404');
     });

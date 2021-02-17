@@ -6,19 +6,21 @@ const register = require('../services/registerUser');
 const Users = require('../models/Users');
 const check = require('../middleware/checkAuth');
 
-initPassport(passport, async(username) => {
-    try {
-        return await Users.findOne({ 'username': username });
-    } catch (err) {
-        console.log(err.message);
-    }
-}, async(id) => {
-    try {
-        return await Users.findById(id);
-    } catch (err) {
-        console.log(err.message);
-    }
-});
+initPassport(passport,
+    async (username) => {
+        try {
+            return await Users.findOne({ 'username': username });
+        } catch (err) {
+            console.log(err.message);
+        }
+    },
+    async (id) => {
+        try {
+            return await Users.findById(id);
+        } catch (err) {
+            console.log(err.message);
+        }
+    });
 
 router.get('/logout', check.ifLoged, (req, res) => {
     req.logOut();
@@ -42,10 +44,10 @@ router.post('/register', check.ifNotLoged, (req, res) => {
     if (password === rePassword) {
         Users.find({ username }, (err, data) => {
             if (data.length > 0) {
-                res.render('register', { message: 'Unsuccessful reristration.Please try again.', title: 'Register' });
+                res.render('register', { messages: { error: 'Unsuccessful reristration.Please try again.' }, title: 'Register' });
             } else {
                 if (register(email, username, password)) {
-                    res.render('login', { message: 'Successful reristration.Please login.', title: 'Login' });
+                    res.render('login', { messages: 'Successful reristration.Please login.', title: 'Login' });
                 } else {
                     res.send('Something went wrong');
                     res.end();
@@ -53,7 +55,7 @@ router.post('/register', check.ifNotLoged, (req, res) => {
             }
         });
     } else {
-        res.render('register', { message: 'Missmatch passwords', title: 'Register' })
+        res.render('register', { message: { error: 'Missmatch passwords' }, title: 'Register' })
     }
 });
 
