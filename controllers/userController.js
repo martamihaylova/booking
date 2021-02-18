@@ -38,25 +38,11 @@ router.get('/register', check.ifNotLoged, (req, res) => {
     res.render('register', { title: 'Register' });
 });
 router.post('/register', check.ifNotLoged, (req, res) => {
-    console.log(req.body);
     let { email, username, password, rePassword } = req.body;
-    username = username.toLowerCase();
-    if (password === rePassword) {
-        Users.find({ username }, (err, data) => {
-            if (data.length > 0) {
-                res.render('register', { messages: { error: 'Unsuccessful reristration.Please try again.' }, title: 'Register' });
-            } else {
-                if (register(email, username, password)) {
-                    res.render('login', { messages: 'Successful reristration.Please login.', title: 'Login' });
-                } else {
-                    res.send('Something went wrong');
-                    res.end();
-                }
-            }
-        });
-    } else {
-        res.render('register', { message: { error: 'Missmatch passwords' }, title: 'Register' })
-    }
+    if (password !== rePassword) {
+        res.render('register', { messages: { error: 'Missmatch passwords' }, title: 'Register' });
+    };
+    register(email, username, password, req, res);
 });
 
 module.exports = router;
