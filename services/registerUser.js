@@ -1,5 +1,4 @@
 const Users = require('../models/Users');
-const passport = require('passport');
 const bcrypt = require('bcrypt');
 const { SALT_ROUNDS } = require('../config/config');
 
@@ -10,7 +9,7 @@ function register(email, name, password, req, res) {
         console.log(data);
         let found = data.find((x) => x?.username.toLowerCase() === name.toLowerCase());
         if(found) res.render('register', { messages: { error: 'Username allready exists.Please try again.' }, title: 'Register' });
-    })
+    });
 
     bcrypt.hash(password, SALT_ROUNDS)
         .then((hashedPassword) => {

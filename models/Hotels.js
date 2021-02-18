@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const hotelSchema = new mongoose.Schema({
 
-    name: {
+    hotel: {
         type: String,
         minlength: 4,
         unique: true,
@@ -13,11 +13,9 @@ const hotelSchema = new mongoose.Schema({
         minlength: 3,
         required: true
     },
-    imageUrl: {
+    imgUrl: {
         type: String,
-        required: true,
-        validate: /^https?/,
-        messages: 'Must be a secured URL',
+        required: true
     },
     freeRooms: {
         type: Number,
@@ -34,4 +32,4 @@ const hotelSchema = new mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model('Hotels', userSchema);
+module.exports = mongoose.model('Hotels', hotelSchema);

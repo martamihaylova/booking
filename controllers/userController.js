@@ -5,6 +5,7 @@ const initPassport = require('../config/passport-config');
 const register = require('../services/registerUser');
 const Users = require('../models/Users');
 const check = require('../middleware/checkAuth');
+const validator = require('validator');
 
 initPassport(passport,
     async (username) => {
@@ -39,10 +40,11 @@ router.get('/register', check.ifNotLoged, (req, res) => {
 });
 router.post('/register', check.ifNotLoged, (req, res) => {
     let { email, username, password, rePassword } = req.body;
-    if (password !== rePassword) {
-        res.render('register', { messages: { error: 'Missmatch passwords' }, title: 'Register' });
-    };
-    register(email, username, password, req, res);
+    if (password !== rePassword || !validator.isEmail(email) || !validator.isAlphanumeric(username)) {
+        res.render('register', { messages: { error: 'Missmatch passwords, invalid email or username' }, title: 'Register' });
+    } else {
+        register(email, username, password, req, res);
+    }
 });
 
 module.exports = router;
