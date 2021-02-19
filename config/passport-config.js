@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt');
 
 function initialize(passport, getUser, grtUserById) {
     const authUser = async (username, password, done) => {
-        username = username.toLowerCase();
         let user = await getUser(username);
         if (user === null) {
             return done(null, false, { message: 'Password or usename incorrect' });
@@ -20,7 +19,7 @@ function initialize(passport, getUser, grtUserById) {
     };
     passport.use(new LocalStrategy({ usernameField: 'username' }, authUser));
 
-    passport.serializeUser((user, done) => done(null, user.id));
+    passport.serializeUser((user, done) => done(null, user._id));
     passport.deserializeUser((id, done) => {
         return done(null, grtUserById(id))
     });
