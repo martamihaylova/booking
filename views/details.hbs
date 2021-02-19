@@ -1,0 +1,27 @@
+<section id="viewhotelDetails">
+    <h2>Details</h2>
+    <div class="hotel-ticket">
+        <div class="hotel-left">
+            <img src={{currentHotel.imgUrl}} alt="">
+        </div>
+        <div class="hotel-right">
+            <div>
+                <h3>{{currentHotel.hotel}}</h3>
+            </div>
+            <div>
+                {{currentHotel.city}}
+            </div>
+            <p><span>Free rooms: {{currentHotel.freeRooms}}</span> </p>
+            {{#if booked}}
+            <p><span class="green">You already have booked a room</span> </p>
+            {{/if}}
+            {{#if owner}}
+            <a href="/edit/{{currentHotel._id}}" class="edit">Edit</a>
+            <a href="/delete/{{currentHotel._id}}" class="remove">Delete</a>
+            {{else}}
+            <a href="/book/{{currentHotel._id}}" class="book">Book</a>
+            {{/if}}
+        </div>
+
+    </div>
+</section>

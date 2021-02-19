@@ -2,7 +2,7 @@
     {{#if hotels}}
     <div class="added-hotels">
     {{#each hotels}}
-        <a href="/{{this._id}}" class="added-hotel">
+        <a href="/details/{{this._id}}" class="added-hotel">
             <img src={{this.imgUrl}} alt="" class="picture-added-hotel">
             <h3>{{this.hotel}}</h3>
             <span>Free rooms: {{this.freeRooms}}</span>

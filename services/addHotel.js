@@ -1,8 +1,11 @@
 const Hotel = require('../models/Hotels');
 
-function createNewHotel(data) {
+function createNewHotel(data, user) {
     let hotel = new Hotel(data);
-    return hotel.save();
+    hotel.save();
+    user.offered.push(hotel);
+    user.save();
+    return hotel;
 }
 
 module.exports = createNewHotel;

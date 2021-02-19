@@ -20,11 +20,11 @@ const userSchema = new mongoose.Schema({
     },
     booked: [{
         type: mongoose.Types.ObjectId,
-        ref: 'Something'
+        ref: 'Hotels'
     }],
     offered: [{
         type: mongoose.Types.ObjectId,
-        ref: 'Something'
+        ref: 'Hotels'
     }],
 });
 
