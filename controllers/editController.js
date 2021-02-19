@@ -8,7 +8,12 @@ router.get('/:id', check.ifLoged, async (req, res) => {
     let user = await req.user;
     getOne(req.params.id)
         .then((currentHotel) => {
-            res.render('edit', { authenticated: req.isAuthenticated(), currentHotel, name: user?.username })
+            res.render('edit', {
+                authenticated: req.isAuthenticated(),
+                currentHotel,
+                id: user?._id,
+                name: user?.username
+            })
         })
         .catch((err) => console.log(er.message));
 });

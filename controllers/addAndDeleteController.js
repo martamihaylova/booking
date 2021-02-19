@@ -7,12 +7,16 @@ const router = Router();
 
 router.get('/:id', check.ifLoged, (req, res) => {
     deleteHotel(req.params.id)
-    .then(() => res.redirect('/'))
-    .catch((err) => console.log(err.message))
+        .then(() => res.redirect('/'))
+        .catch((err) => console.log(err.message))
 })
 router.get('/', check.ifLoged, async (req, res) => {
     let user = await req.user;
-    res.render('add', { authenticated: req.isAuthenticated(), name: user?.username })
+    res.render('add', {
+        authenticated: req.isAuthenticated(),
+        id: user?._id,
+        name: user?.username
+    })
 });
 router.post('/', async (req, res) => {
     try {

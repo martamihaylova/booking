@@ -7,7 +7,15 @@ router.get('/:id', check.ifLoged, async (req, res) => {
     let user = await req.user;
     let currentHotel = await hotelDetails(req.params.id);
     let owner = (currentHotel.owner + '') === (user._id + '');
-    res.render('details', { authenticated: req.isAuthenticated(), name: user?.username, currentHotel, owner})
+    let alreadyBooked = user.booked.includes(req.params.id);
+    res.render('details', {
+        authenticated: req.isAuthenticated(),
+        id: user?._id,
+        name: user?.username,
+        currentHotel,
+         owner,
+         alreadyBooked
+    })
 });
 
 module.exports = router;
