@@ -12,9 +12,6 @@
                 {{currentHotel.city}}
             </div>
             <p><span>Free rooms: {{currentHotel.freeRooms}}</span> </p>
-            {{#if booked}}
-            <p><span class="green">You already have booked a room</span> </p>
-            {{/if}}
             {{#if owner}}
             <a href="/edit/{{currentHotel._id}}" class="edit">Edit</a>
             <a href="/delete/{{currentHotel._id}}" class="remove">Delete</a>
