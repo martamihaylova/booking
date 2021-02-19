@@ -19,6 +19,7 @@ const hotelSchema = new mongoose.Schema({
     },
     freeRooms: {
         type: Number,
+        required: true,
         min: 1,
         max: 100
     },
@@ -27,7 +28,7 @@ const hotelSchema = new mongoose.Schema({
         ref: 'Users'
     }],
     owner: {
-        type: String,
+        type: mongoose.Types.ObjectId,
         required: true
     },
 });

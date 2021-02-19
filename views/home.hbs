@@ -1,15 +1,16 @@
-
 <section id="viewCatalog" class="background-img">
+    {{#if hotels}}
     <div class="added-hotels">
-        <a href="" class="added-hotel">
-            <img src="https://image.freepik.com/free-vector/flat-hotel-building_23-2148162501.jpg" alt=""
-                class="picture-added-hotel">
-            <h3>Hilton Toronto</h3>
-            <span>Free rooms: 42</span>
+    {{#each hotels}}
+        <a href="/{{this._id}}" class="added-hotel">
+            <img src={{this.imgUrl}} alt="" class="picture-added-hotel">
+            <h3>{{this.hotel}}</h3>
+            <span>Free rooms: {{this.freeRooms}}</span>
         </a>
-        <a href="" class="added-hotel">
-            <img src="https://image.freepik.com/free-vector/flat-hotel-building-town_52683-10040.jpg"
-                alt="" class="picture-added-hotel">
+        {{/each}}
+        {{!-- <a href="" class="added-hotel">
+            <img src="https://image.freepik.com/free-vector/flat-hotel-building-town_52683-10040.jpg" alt=""
+                class="picture-added-hotel">
             <h3>Auckland Inn</h3>
             <span>Free rooms: 35</span>
         </a>
@@ -17,10 +18,12 @@
             <img src="https://image.freepik.com/free-vector/showplace-illustration-with-all-famous-buildings-linear-banner_1416-984.jpg"
                 alt="" class="picture-added-hotel">
             <h3>Hotel Berlin</h3>
-            <span>Free rooms: 15</span>
+            <span>Free rooms: 15</span> --}}
         </a>
     </div>
-    <!-- <div class="guest">
+    {{else}}
+    <div class="guest">
         There are no Hotels found...
-    </div> -->
+    </div>
+    {{/if}}
 </section>
