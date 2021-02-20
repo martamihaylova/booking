@@ -19,6 +19,7 @@ function register(email, name, password, req, res) {
                 password: hashedPassword,
             });
             user.save();
+            res.locals.user = user;
             req.login(user, function (err) {
                 if (err) { return next(err); }
                 return res.redirect('/');
