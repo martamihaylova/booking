@@ -3,13 +3,13 @@ const bcrypt = require('bcrypt');
 const { SALT_ROUNDS } = require('../config/config');
 
 function register(email, name, password, req, res) {
-    
+
     Users.find({})
-    .then((data) => {
-        let foundName = data.find((x) => x?.username.toLowerCase() === name.toLowerCase());
-        let foundEmail = data.find((x) => x?.email === email);
-        if(foundName || foundEmail) res.render('register', { messages: { error: 'Username or email allready exists.Please try again.' }, title: 'Register' });
-    });
+        .then((data) => {
+            let foundName = data.find((x) => x?.username.toLowerCase() === name.toLowerCase());
+            let foundEmail = data.find((x) => x?.email === email);
+            if (foundName || foundEmail) res.render('register', { messages: { error: 'Username or email allready exists.Please try again.' }, title: 'Register' });
+        });
 
     bcrypt.hash(password, SALT_ROUNDS)
         .then((hashedPassword) => {
@@ -21,9 +21,9 @@ function register(email, name, password, req, res) {
             user.save();
             req.login(user, function (err) {
                 if (err) { return next(err); }
-                 res.redirect('/');
-                 return user;
+                return res.redirect('/');
             });
+
         })
         .catch((err) => {
             console.log(err.message);
